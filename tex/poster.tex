@@ -1,0 +1,37 @@
+\documentclass[12pt,landscape]{article}
+\usepackage{fontspec}
+\setmainfont{Bitstream Vera Sans}
+\usepackage[a3paper, margin=1.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{dashrule}
+\usepackage{graphicx}
+\graphicspath{{logo/}}
+%\setlength{\voffset}{-0.75in}
+%\setlength{\headsep}{1pt}
+
+\definecolor{background}{HTML}{FFE8C9}
+\definecolor{emphasistext}{HTML}{113E89}
+\definecolor{normaltext}{HTML}{393938}
+\definecolor{deemphasistext}{HTML}{6E6F6E}
+
+\pagecolor{background}
+\begin{document}
+\begin{minipage}{0.5\textwidth}
+\includegraphics[height=5cm, keepaspectratio]{{default-logo.png}}
+\end{minipage} \hfill
+\begin{minipage}{0.3\textwidth}
+\end{minipage} \hfill
+\begin{minipage}{0.2\textwidth}
+\begin{flushright}
+\begin{center}
+\textcolor{emphasistext}{hacksoc}.org\\
+\textcolor{emphasistext}{hack}@yusu.org\\
+freenode \textcolor{emphasistext}{\#cs-york}\\
+twitter.com/\textcolor{emphasistext}{hacksoc}\\
+facebook.com/\textcolor{emphasistext}{hacksoc}\\
+\end{center}
+\end{flushright}
+\end{minipage}
+\hdashrule[0ex]{39cm}{1pt}{10pt}\\
+test
+\end{document}
