@@ -1,37 +1,72 @@
-\documentclass[12pt,landscape]{article}
+\documentclass[14pt, landscape]{article}
 \usepackage{fontspec}
 \setmainfont{Bitstream Vera Sans}
 \usepackage[a3paper, margin=1.5cm]{geometry}
 \usepackage{xcolor}
 \usepackage{dashrule}
+\usepackage{multicol}
+\usepackage{scrextend}
+\usepackage{xpatch}
 \usepackage{graphicx}
 \graphicspath{{logo/}}
-%\setlength{\voffset}{-0.75in}
-%\setlength{\headsep}{1pt}
 
 \definecolor{background}{HTML}{FFE8C9}
-\definecolor{emphasistext}{HTML}{113E89}
+\definecolor{emphasistext}{HTML}{34537B}
 \definecolor{normaltext}{HTML}{393938}
 \definecolor{deemphasistext}{HTML}{6E6F6E}
 
+\pagenumbering{gobble}
 \pagecolor{background}
+
 \begin{document}
 \begin{minipage}{0.5\textwidth}
 \includegraphics[height=5cm, keepaspectratio]{{default-logo.png}}
+\vspace{0.1cm}
 \end{minipage} \hfill
 \begin{minipage}{0.3\textwidth}
 \end{minipage} \hfill
 \begin{minipage}{0.2\textwidth}
 \begin{flushright}
 \begin{center}
-\textcolor{emphasistext}{hacksoc}.org\\
-\textcolor{emphasistext}{hack}@yusu.org\\
-freenode \textcolor{emphasistext}{\#cs-york}\\
-twitter.com/\textcolor{emphasistext}{hacksoc}\\
-facebook.com/\textcolor{emphasistext}{hacksoc}\\
+\textcolor{emphasistext}{hacksoc}\textcolor{deemphasistext}{.org}\\
+\textcolor{emphasistext}{hack}\textcolor{deemphasistext}{@yusu.org}\\
+\textcolor{deemphasistext}{freenode}\textcolor{emphasistext}{\#cs-york}\\
+\textcolor{deemphasistext}{twitter.com/}\textcolor{emphasistext}{hacksoc}\\
+\textcolor{deemphasistext}{facebook.com/}\textcolor{emphasistext}{hacksoc}\\
 \end{center}
 \end{flushright}
+\end{minipage}\\
+\hdashrule[0cm]{39.5cm}{1pt}{2pt}\\
+\begin{center}
+\begin{minipage}{0.6\textwidth}
+\begin{flushright}
+\textcolor{deemphasistext}{{\fontsize{30}{30}\selectfont What's going on in Week }}
+\vspace{0.3cm}
+\end{flushright}
 \end{minipage}
-\hdashrule[0ex]{39cm}{1pt}{10pt}\\
-test
+\begin{minipage}{0.3\textwidth}
+\textcolor{emphasistext}{{\fontsize{45}{50}\selectfont 9}}\vspace{0.3cm}\\
+\end{minipage}
+\end{center}
+\noindent\hdashrule[0cm]{39.5cm}{1pt}{2pt}\vspace{0.3cm}\\
+
+
+\begin{minipage}[t][17cm][t]{\textwidth}
+\begin{multicols}{2}
+
+\begin{minipage}{0.5\textwidth}
+{\fontsize{30}{40}\selectfont Tuesday}\\
+\vspace{0.2cm}
+\begin{addmargin}[1em]{0em}
+{\fontsize{24}{34}\selectfont \textcolor{emphasistext}{HackPub}}\\
+\vspace{0.1cm}\\
+{\fontsize{20}{30}\selectfont The Rook \& Gaskill at 19:30}
+\end{addmargin}
+\end{minipage}
+\vspace{0.5cm}\\
+
+\end{multicols}
+\end{minipage}
+
+\noindent\hdashrule[0cm]{39.5cm}{1pt}{2pt}
 \end{document}
