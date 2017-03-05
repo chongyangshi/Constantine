@@ -9,12 +9,16 @@ from codecs import open
 from os import path
 
 here = path.abspath(path.dirname(__file__))
+try:
+    long_description = open('README.md').read()
+except:
+    long_description = ""
 
 setup(
     name='Constantine',
     version='1.0',
     description='A poster generator that does something that should have been automated ages ago.',
-    long_description=open('README.md').read(),
+    long_description=long_description,
     url='https://github.com/icydoge/Constantine',
     author='C Shi',
     author_email='icydoge@gmail.com',
