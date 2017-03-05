@@ -23,18 +23,15 @@ def check_date_string(date):
 
     return True
 
-
-def read_config():
+full_path = get_project_full_path()
+def read_config(config_file=full_path + "/settings.json"):
     """ Return the configuration value of requestedKey. """
 
-    full_path = get_project_full_path()
-    configFile = full_path + "/settings.json"
-
-    if not os.path.isfile(configFile):
+    if not os.path.isfile(config_file):
         raise ValueError("The configuration file settings.json does not exist!")
 
     try:
-        with open(configFile) as SettingsFile:
+        with open(config_file) as SettingsFile:
             SettingsData = json.load(SettingsFile)
             if SettingsData['logo'].startswith('/'): #Absolute path.
                 logo_path = SettingsData['logo']

@@ -16,7 +16,7 @@ except:
 
 setup(
     name='Constantine',
-    version='1.0',
+    version='1.0.2',
     description='A poster generator that does something that should have been automated ages ago.',
     long_description=long_description,
     url='https://github.com/icydoge/Constantine',
@@ -34,12 +34,12 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     keywords='pdf generator',
-    packages=find_packages(exclude=['contrib', 'docs', 'tests']),
+    py_modules=['main', 'utils'],
     install_requires=['requests'],
     extras_require={},
     entry_points={
         'console_scripts': [
-            'Constantine=Constantine:main',
+            'Constantine=Constantine',
         ],
     },
 )
