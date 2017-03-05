@@ -13,9 +13,8 @@ GOOGLE_CALENDAR_API = "https://www.googleapis.com/calendar/v3/calendars/"
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 XELATEX_TIMEOUT = 15
 
-if len(sys.argv) < 2:
-    print("Usage: Constantine /path/to/output/file.pdf {/path/to/settings.json}")
-    print("If settings.json is not supplied, Constantine will try to look for it under script path, which implies source install.")
+if len(sys.argv) != 2:
+    print("Expecting only one parameter (output directory), exiting.")
     sys.exit(1)
 
 output_dir = sys.argv[1].rsplit('/', 1)[0]
@@ -25,11 +24,7 @@ if not os.path.isdir(output_dir):
     sys.exit(1)
 
 print("Reading settings.json...")
-if len(sys.argv) > 2:
-    settings_file = sys.argv[2]
-    settings = utils.read_config(settings_file)
-else:
-    settings = utils.read_config()
+settings = utils.read_config()
 
 # Find out which week is the next week we are working on.
 today = datetime.datetime.today()

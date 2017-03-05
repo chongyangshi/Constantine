@@ -23,22 +23,25 @@ def check_date_string(date):
 
     return True
 
-full_path = get_project_full_path()
-def read_config(config_file=full_path + "/settings.json"):
+
+def read_config():
     """ Return the configuration value of requestedKey. """
 
+    full_path = get_project_full_path()
+    config_file = full_path + '/' + "settings.json"
     if not os.path.isfile(config_file):
         raise ValueError("The configuration file settings.json does not exist!")
 
     try:
         with open(config_file) as SettingsFile:
             SettingsData = json.load(SettingsFile)
-            if SettingsData['logo'].startswith('/'): #Absolute path.
+            if SettingsData['logo'].startswith('/'): # Absolute path.
                 logo_path = SettingsData['logo']
             else:
                 logo_path = full_path + "/" + SettingsData['logo']
+
             if not os.path.isfile(logo_path):
-                raise ValueError("The logo file does not exist!")
+                raise ValueError("The logo file does not exist! If you are using Constantine installed from pip (or otherwise as a package), use absolute path like /home/user/logo.png for 'logo' in settings.json .")
             if not any([check_date_string(i) for i in SettingsData['term_start_dates']]):
                 raise ValueError("Invalid date(s) found in 'term_start_dates' of settings.json!")
             return SettingsData

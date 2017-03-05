@@ -7,6 +7,7 @@
 from setuptools import setup, find_packages
 from codecs import open
 from os import path
+import glob
 
 here = path.abspath(path.dirname(__file__))
 try:
@@ -14,9 +15,15 @@ try:
 except:
     long_description = ""
 
+data_files = [('', ['settings.json', 'special_text.txt', 'latex_template.txt'])]
+directories = glob.glob('tex/logo/')
+for directory in directories:
+    files = glob.glob(directory + '*')
+    data_files.append((directory, files))
+
 setup(
     name='Constantine',
-    version='1.0.2',
+    version='1.0.4',
     description='A poster generator that does something that should have been automated ages ago.',
     long_description=long_description,
     url='https://github.com/icydoge/Constantine',
@@ -36,10 +43,11 @@ setup(
     keywords='pdf generator',
     py_modules=['main', 'utils'],
     install_requires=['requests'],
+    data_files=data_files,
     extras_require={},
     entry_points={
         'console_scripts': [
-            'Constantine=Constantine',
+            'Constantine=main',
         ],
     },
 )
