@@ -119,3 +119,6 @@ print("Copying PDF to " + output_file)
 p = subprocess.Popen(['cp', latex_target_path[:-4] + ".pdf", output_file], stdout=subprocess.PIPE, cwd=os.getcwd())
 result_code = p.returncode
 print("PDF should have been copied to: " + output_file)
+
+def main(): # Keep setuptools happy?
+    pass
