@@ -1,4 +1,4 @@
-\documentclass[14pt, landscape]{article}
+\documentclass[12pt, landscape]{article}
 \usepackage{fontspec}
 \setmainfont{Bitstream Vera Sans}
 \usepackage[a3paper, margin=1.5cm]{geometry}
@@ -28,11 +28,13 @@
 \begin{minipage}{0.2\textwidth}
 \begin{flushright}
 \begin{center}
+{\fontsize{20}{20}\selectfont
 \textcolor{emphasistext}{%(domain_main)s}\textcolor{deemphasistext}{%(domain_tld)s}\\
 \textcolor{emphasistext}{%(email_user)s}\textcolor{deemphasistext}{%(email_domain)s}\\
 \textcolor{deemphasistext}{%(irc_network)s}\textcolor{emphasistext}{%(irc_channel)s}\\
 \textcolor{deemphasistext}{twitter.com/}\textcolor{emphasistext}{%(twitter)s}\\
 \textcolor{deemphasistext}{facebook.com/}\textcolor{emphasistext}{%(facebook)s}\\
+}
 \end{center}
 \end{flushright}
 \end{minipage}\\
