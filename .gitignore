@@ -93,3 +93,4 @@ ENV/
 
 # LaTeX working files.
 tex/Constantine-*
+tex/Constantine.*
