@@ -31,6 +31,8 @@ Or for pip installed package:
 
     Constantine /path/to/output.pdf
 
+**The script will always fetch next week's events, with a week starting from Monday.**
+
 And it's done. If any error occurs outputs should provide some clue.
 
 #Special Text#
@@ -38,4 +40,4 @@ The file `special_text.txt` contains a section that will be automatically added 
 
 #ToDo's#
 * In LaTeX, `multicols*`(multiple columns without balancing) cannot be used inside a box, without which the bottom dotted line seems difficulty to fit. I am pretty terrible at LaTeX, so if you have a better solution please do send a pull request :)
-* The whole thing is horribly packaged, which ensures that a TypeError occurs after the packaged main finishes. This is not an issue when running from source instead of installing from pip.
+* Sorry for the horrible packaging, by the way. The lack of OOP in this hacked-together solution makes good packaging difficult.

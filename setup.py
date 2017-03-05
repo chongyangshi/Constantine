@@ -23,7 +23,7 @@ for directory in directories:
 
 setup(
     name='Constantine',
-    version='1.0.4',
+    version='1.0.5',
     description='A poster generator that does something that should have been automated ages ago.',
     long_description=long_description,
     url='https://github.com/icydoge/Constantine',
@@ -47,7 +47,7 @@ setup(
     extras_require={},
     entry_points={
         'console_scripts': [
-            'Constantine=main',
+            'Constantine=main:main',
         ],
     },
 )
