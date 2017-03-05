@@ -1,6 +1,6 @@
 Constantine
 ===================
-Constantine is a [Python 3](https://www.python.org/downloads/) tool for automatically generating event posters from public Google Calendar events. It is primarily written for [HackSoc](https://hacksoc.org) of University of York to partially automate some publicity work, but is written in a very adaptable way for other uses. It uses [XeTex](http://xetex.sourceforge.net/) for PDF typesetting.
+Constantine is a [Python 3](https://www.python.org/downloads/) tool for automatically generating event posters from public Google Calendar events. It is primarily written for [HackSoc](https://hacksoc.org) of University of York to partially automate some publicity work, but is written in a very adaptable way for other uses. It uses [XeTeX](http://xetex.sourceforge.net/) for PDF typesetting.
 
 Constantine requires Python 3.3+ and XeLaTeX.
 
