@@ -94,3 +94,6 @@ ENV/
 # LaTeX working files.
 tex/Constantine-*
 tex/Constantine.*
+
+# File list no longer used.
+files.txt
