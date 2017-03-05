@@ -36,7 +36,11 @@ def read_config():
     try:
         with open(configFile) as SettingsFile:
             SettingsData = json.load(SettingsFile)
-            if not os.path.isfile(full_path + "/" + SettingsData['logo']):
+            if SettingsData['logo'].startswith('/'): #Absolute path.
+                logo_path = SettingsData['logo']
+            else:
+                logo_path = full_path + "/" + SettingsData['logo']
+            if not os.path.isfile(logo_path):
                 raise ValueError("The logo file does not exist!")
             if not any([check_date_string(i) for i in SettingsData['term_start_dates']]):
                 raise ValueError("Invalid date(s) found in 'term_start_dates' of settings.json!")
@@ -95,8 +99,11 @@ def settings_to_formatting(settings):
     formatting = {}
     for key, val in settings.items():
 
-        if key == "logo" and val.startswith('tex/'):
-            formatting["logo_file"] = val[4:]
+        if key == "logo":
+            if val.startswith('tex/'):
+                formatting["logo_file"] = val[4:]
+            else:
+                formatting["logo_file"] = val
         elif key == "url":
             formatting["domain_main"] = val.rsplit('.', 1)[0]
             formatting["domain_tld"] = "." + val.rsplit('.', 1)[1]

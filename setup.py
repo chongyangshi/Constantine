@@ -12,22 +12,26 @@ here = path.abspath(path.dirname(__file__))
 
 setup(
     name='Constantine',
-    version='0.1',
+    version='1.0',
     description='A poster generator that does something that should have been automated ages ago.',
+    long_description=open('README.md').read(),
     url='https://github.com/icydoge/Constantine',
     author='C Shi',
     author_email='icydoge@gmail.com',
     license='MIT',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 3 - Beta',
         'Intended Audience :: End Users/Desktop',
         'Topic :: Text Processing :: General',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
     keywords='pdf generator',
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-    install_requires=[],
+    install_requires=['requests'],
     extras_require={},
     entry_points={
         'console_scripts': [
