@@ -7,7 +7,9 @@ Constantine requires Python 3.3+ and XeLaTeX.
 #Installation#
 First, to access Google Calendar, even just for public events, you need a Google API Key, which can be obtained by visiting Google API Console [here](https://console.developers.google.com/apis/credentials), you may wish to create a new Google API project for Constantine when prompted.
 
-After obtaining the API Key, edit `settings.json` as required:
+After obtaining the API Key, edit `settings.json`.
+`settings.json` is under the repository root for source, and under your `site-packages/Constantine-1.0.5-py3.5.egg/` (e.g. in virtualenv's `env/lib/python3.x/site-packages/Constantine-1.0.5-py3.x.egg/`) for package installations.
+Edit `settings.json` as followed:
 * `logo`: either relative path (when running the source) or absolute path (when installed as a package) of your organisation's logo, which is highly recommended to be a background-transparent PNG file.
 * `url`, `email`, `irc_network`, `irc_channel`, `twitter`, `facebook`: contact information for your organisation, modify as appropriate.
 * `calendar_id`: the Google Calendar ID for the calendar you want to fetch events from, a guide for finding the ID can be found [here](https://support.appmachine.com/hc/en-us/articles/203645966-Find-your-Google-Calendar-ID-for-the-Events-block).
