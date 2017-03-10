@@ -77,10 +77,10 @@ for day, day_events in events_organised.items():
 
     day_tex = "\\begin{minipage}{0.5\\textwidth}{\\fontsize{30}{40}\\selectfont %s}\\\\\\vspace{0.2cm}\\begin{addmargin}[1em]{0em}" % (DAYS[day])
     for day_event in day_events:
-        day_tex += "{\\fontsize{24}{34}\\selectfont \\textcolor{emphasistext}{ %s }}\\\\\\vspace{0.05cm}\\\\{\\fontsize{20}{30}\\selectfont %s at %s }" % (day_event['what'], day_event['where'], day_event['when'])
+        day_tex += "{\\fontsize{24}{34}\\selectfont \\textcolor{emphasistext}{ %s }}\\\\\\vspace{0.05cm}\\\\{\\fontsize{20}{30}\\selectfont %s at %s} \\\\" % (day_event['what'], day_event['where'], day_event['when'])
         if day_events.index(day_event) < len(day_events) - 1:
-            day_tex += "\\vspace{0.5cm}"
-        day_tex += "\\end{addmargin}\\end{minipage}\\vspace{0.75cm}\n"
+            day_tex += "\\vspace{0.3cm}\\\\"
+    day_tex += "\\end{addmargin}\\end{minipage}\\vspace{0.75cm}\n"
     event_content += day_tex
 latex_formatting['event_content'] = event_content
 
@@ -101,18 +101,20 @@ with open(latex_target_path, 'w+') as latex_file:
 print("Generating PDF...")
 working_dir = utils.get_project_full_path() + "/tex"
 p = subprocess.Popen(['xelatex', latex_target_path], stdout=subprocess.PIPE, cwd=working_dir)
+success = False
 try:
     output = p.communicate(timeout=XELATEX_TIMEOUT)
     result_code = p.returncode
 
     if result_code == 0:
+        success = True
         print("Success! PDF saved at: " + latex_target_path[:-4] + ".pdf")
     else:
         print("Failure! Check " + latex_target_path[:-4] + ".log for details.")
 except subprocess.TimeoutExpired:
     print("Failure! Something has made XeLaTeX to wait. Check " + latex_target_path[:-4] + ".log for details.")
 
-if result_code != 0:
+if not success:
     sys.exit(1)
 
 print("Copying PDF to " + output_file)
