@@ -56,8 +56,8 @@
 \begin{minipage}[t][17cm][t]{\textwidth}
 \begin{multicols}{2}
 
-%(event_content)s \\
-%(special_text)s \\
+%(event_content)s 
+%(special_text)s
 
 \end{multicols}
 \end{minipage}
