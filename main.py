@@ -54,6 +54,10 @@ events = api_response.json()
 # Organise data.
 events_organised = {DAYS.index(i):[] for i in DAYS}
 for event in events['items']:
+
+    if any([(i not in event) for i in ['start', 'summary', 'location']]):
+        continue # Just in case a broken event returned in json.
+
     event_date = event['start']['dateTime']
     datetime_split = event_date.split('T')
     event_datetime = datetime.datetime.strptime(datetime_split[0], "%Y-%m-%d")
