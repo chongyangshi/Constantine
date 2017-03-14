@@ -46,7 +46,8 @@ request_params = {'key': settings['google_api_key'], 'orderBy': 'startTime', 'si
 print("Reading this week's calendar events...")
 api_response = requests.get(request_url, params=request_params)
 if api_response.status_code != 200:
-    print("Error fetching calendar data from Google, check your network connection and API key.")
+    print("Error fetching calendar data from Google, check your network connection and API key.\
+        If you have a valid API key, it may be missing Google Calendar Access.")
     sys.exit(1)
 events = api_response.json()
 

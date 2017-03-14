@@ -97,3 +97,6 @@ tex/Constantine.*
 
 # File list no longer used.
 files.txt
+
+# Configuration file.
+settings.json

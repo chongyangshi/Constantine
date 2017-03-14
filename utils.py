@@ -1,4 +1,4 @@
-import os
+import os, sys
 import datetime
 import string, random
 import json
@@ -30,7 +30,9 @@ def read_config():
     full_path = get_project_full_path()
     config_file = full_path + '/' + "settings.json"
     if not os.path.isfile(config_file):
-        raise ValueError("The configuration file settings.json does not exist!")
+        print("Error: I cannot find the configuration file settings.json.")
+        print("If you have not yet done so, please copy settings-example.json to settings.json and edit before running Constantine again.")
+        sys.exit(1)
 
     try:
         with open(config_file) as SettingsFile:
