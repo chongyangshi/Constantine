@@ -13,9 +13,22 @@ GOOGLE_CALENDAR_API = "https://www.googleapis.com/calendar/v3/calendars/"
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 XELATEX_TIMEOUT = 15
 
-if len(sys.argv) != 2:
-    print("Expecting only one parameter (output directory), exiting.")
+if (not 2 <= len(sys.argv) <= 3) or (sys.argv[1] in ['-h', '--help']):
+    print("Usage: python main.py /path/to/output.pdf [YYYY-MM-DD]")
+    print("Optionally provide a date as the second argument to fetch the calendar for the following week of that date (not for the week the date is in!) e.g. 2017-02-01")
+    print("Otherwise, Constantine will fetch the calendar for the next week to your system's date.")
     sys.exit(1)
+
+# Process date param.
+if len(sys.argv) == 3:
+    set_date = sys.argv[2]
+    if not utils.check_date_string(set_date):
+        print("Error: the date you have set is invalid, it must be in YYYY-MM-DD form such as 2017-02-01.")
+        sys.exit(1)
+    else:
+        set_date = datetime.datetime.strptime(set_date, "%Y-%m-%d")
+else:
+    set_date = datetime.datetime.today()
 
 output_dir = sys.argv[1].rsplit('/', 1)[0]
 output_file = sys.argv[1]
@@ -32,8 +45,7 @@ print("Reading settings.json...")
 settings = utils.read_config()
 
 # Find out which week is the next week we are working on.
-today = datetime.datetime.today()
-next_monday = today + datetime.timedelta(days=(7 - today.weekday()))
+next_monday = set_date + datetime.timedelta(days=(7 - set_date.weekday()))
 monday_after = next_monday + datetime.timedelta(days=7)
 start_date = next_monday.strftime("%Y-%m-%d") + "T00:00:00Z"
 end_date = monday_after.strftime("%Y-%m-%d") + "T00:00:00Z"
@@ -43,7 +55,7 @@ week_number = int((next_monday - term_start).days / 7 + 1)
 # Fetch data.
 request_url = GOOGLE_CALENDAR_API + settings['calendar_id'] + "/events"
 request_params = {'key': settings['google_api_key'], 'orderBy': 'startTime', 'singleEvents': 'true', 'timeMin': start_date, 'timeMax': end_date}
-print("Reading this week's calendar events...")
+print("Reading calendar events for week starting {}...".format(next_monday.strftime("%Y-%m-%d")))
 api_response = requests.get(request_url, params=request_params)
 if api_response.status_code != 200:
     print("Error fetching calendar data from Google, check your network connection and API key.\
