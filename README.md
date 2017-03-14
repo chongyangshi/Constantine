@@ -25,9 +25,9 @@ Constantine only has one dependent package, [requests](http://docs.python-reques
 
 Make sure that XeLaTeX works on your system by executing `xelatex -version`, then run Constantine with:
 
-    python main.py /path/to/output.pdf
+    python main.py /path/to/output.pdf [YYYY-MM-DD]
 
-**The script will always fetch next week's events, with a week starting from Monday.**
+If the optional second argument (a date such as 2017-02-01) is passed in, Constantine will fetch the calendar for the week **after** that date, rather than for the week after today. 
 
 And it's done. If any error occurs outputs should provide some clue.
 
