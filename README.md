@@ -4,7 +4,7 @@ Constantine is a [Python 3](https://www.python.org/downloads/) tool for automati
 
 Constantine requires Python 3.3+ and XeLaTeX.
 
-#Installation#
+# Installation #
 First, to access Google Calendar, even just for public events, you need a Google API Key, which can be obtained by visiting Google API Console [here](https://console.developers.google.com/apis/credentials), you may wish to create a new Google API project for Constantine when prompted.
 
 You will also need to enable Google Calendar access for your API key, which can be enabled by clicking the "Enable" button after searching for Google Calendar in the Google Developer Console, as shown below:
@@ -31,9 +31,9 @@ Make sure that XeLaTeX works on your system by executing `xelatex -version`, the
 
 And it's done. If any error occurs outputs should provide some clue.
 
-#Special Text#
+# Special Text #
 The file `special_text.txt` contains a section that will be automatically added to the end of the main content, allowing custom text to be added. If you do not want this section to be created, make this file empty. Otherwise, the first line will be the section title (resembling the style of e.g. "Tuesday") and the rest of the lines will be the section text.
 
-#ToDo's#
+# ToDo's #
 * In LaTeX, `multicols*`(multiple columns without balancing) cannot be used inside a box, without which the bottom dotted line seems difficulty to fit. I am pretty terrible at LaTeX, so if you have a better solution please do send a pull request :)
 * Sorry for the horrible packaging, by the way. The lack of OOP in this hacked-together solution makes good packaging difficult.
