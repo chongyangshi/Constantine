@@ -19,6 +19,11 @@ if len(sys.argv) != 2:
 
 output_dir = sys.argv[1].rsplit('/', 1)[0]
 output_file = sys.argv[1]
+
+if '/' not in output_file: # Current directory.
+    output_dir = './'
+    output_file = './' + output_file
+
 if not os.path.isdir(output_dir):
     print("The directory " + output_dir + " does not exist, exiting.")
     sys.exit(1)
