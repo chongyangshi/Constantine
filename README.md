@@ -25,14 +25,20 @@ Constantine only has one dependent package, [requests](http://docs.python-reques
 
 Make sure that XeLaTeX works on your system by executing `xelatex -version`, then run Constantine with:
 
-    python main.py /path/to/output.pdf [YYYY-MM-DD]
+    python main.py /path/to/output.pdf --text=/path/to/special/text.txt --date=YYYY-MM-DD
 
-If the optional second argument (a date such as 2017-02-01) is passed in, Constantine will fetch the calendar for the week **after** that date, rather than for the week after today. 
+Optional arguments:
+
+* `text`: a path to the text file containing the special text, see **Special Text** for more details. `special_text.txt` under the script directory will be used if unspecified.
+* `date`: a specific date for Constantine to fetch events for the week **after** that date. Today's date will be used if unspecified.
+
+Old style arguments (`python main.py /path/to/output.pdf [YYYY-MM-DD]`) will continue to work for the time being.
 
 And it's done. If any error occurs outputs should provide some clue.
 
 # Special Text #
-The file `special_text.txt` contains a section that will be automatically added to the end of the main content, allowing custom text to be added. If you do not want this section to be created, make this file empty. Otherwise, the first line will be the section title (resembling the style of e.g. "Tuesday") and the rest of the lines will be the section text.
+A text file can contain a section that will be automatically added to the end of the main content, allowing custom text to be added. The first line will be the section title (resembling the style of e.g. "Tuesday") and the rest of the lines will be the section text.
+The default file and also the example can be found in `special_text.txt`, you can specify a custom file to use by calling Constantine with `--text=/path/to/special/text.txt`.
 
 # ToDo's #
 * In LaTeX, `multicols*`(multiple columns without balancing) cannot be used inside a box, without which the bottom dotted line seems difficulty to fit. I am pretty terrible at LaTeX, so if you have a better solution please do send a pull request :)

@@ -5,24 +5,48 @@
 
 import utils
 
+import os
 import datetime
 import subprocess
 import sys
 
 MAIN_TIMEOUT = 15
 
-if (not 3 <= len(sys.argv) <= 4) or (sys.argv[1] in ['-h', '--help']):
-    print("Usage: python auto_poster.py /path/to/Constantine /path/to/output.pdf [YYYY-MM-DD]")
+if (not 3 <= len(sys.argv) <= 5) or (sys.argv[1] in ['-h', '--help']):
+    print("Usage: python auto_poster.py /path/to/Constantine /path/to/output.pdf [options]")
     print("Helper script useful for cron jobs. Pass in the directory of Constantine's main.py for working directory purposes.")
-    print("If no date is passed in as last parameter, today's date will be used to judge whether it's term time or not.")
+    print("Options:")
+    print("--date=YYYY-MM-DD : Provide a date as the second argument to fetch the calendar for the following week of that date (not for the week the date is in!) e.g. 2017-02-01 | Default: Today's date.")
+    print("--text=/path/to/special/text.txt : Provide a custom path to the special text file to be included in the poster. | Default: special_text.txt under the script directory.")
+    print()
     sys.exit(1)
 
 constantine_directory = sys.argv[1]
 output_file = sys.argv[2]
-if len(sys.argv) == 4:
-    set_date = datetime.datetime.strptime(sys.argv[3], "%Y-%m-%d")
-else:
-    set_date = datetime.datetime.today()
+set_date = datetime.datetime.today()
+text_file_path = utils.get_project_full_path() + "/special_text.txt"
+if len(sys.argv) > 3:
+    for argv in sys.argv[3:]:
+
+        # Date.
+        if (not argv.startswith('--')) or argv.startswith('--date='):
+            # Support old options format.
+            if argv.startswith('--date='):
+                set_date = argv[7:]
+            else:
+                set_date = argv
+
+            if not utils.check_date_string(set_date):
+                print("Error: the date you have set is invalid, it must be in YYYY-MM-DD form such as 2017-02-01.")
+                sys.exit(1)
+            else:
+                set_date = datetime.datetime.strptime(set_date, "%Y-%m-%d")
+
+        # Special text.
+        if argv.startswith('--text='):
+            text_file_path = argv[7:]
+            if text_file_path.startswith('~'):
+                text_file_path = os.path.expanduser('~') + '/' + text_file_path[1:]
 
 settings = utils.read_config()
 
@@ -33,7 +57,7 @@ week_number = int((next_monday - term_start).days / 7 + 1)
 
 if (1 <= week_number <= 10):
     print("Running Constantine for Week " + str(week_number) + ".")
-    p = subprocess.Popen(['python', 'main.py', output_file, date_param], stdout=subprocess.PIPE, cwd=constantine_directory)
+    p = subprocess.Popen(['python', 'main.py', output_file, "--date=" + date_param, "--text=" + text_file_path], stdout=subprocess.PIPE, cwd=constantine_directory)
     output = p.communicate(timeout=MAIN_TIMEOUT)
     print("Finished with code " + str(p.returncode))
     sys.exit(p.returncode) # Exit with the same code for monitoring purposes.

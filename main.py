@@ -13,22 +13,38 @@ GOOGLE_CALENDAR_API = "https://www.googleapis.com/calendar/v3/calendars/"
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 XELATEX_TIMEOUT = 15
 
-if (not 2 <= len(sys.argv) <= 3) or (sys.argv[1] in ['-h', '--help']):
-    print("Usage: python main.py /path/to/output.pdf [YYYY-MM-DD]")
-    print("Optionally provide a date as the second argument to fetch the calendar for the following week of that date (not for the week the date is in!) e.g. 2017-02-01")
-    print("Otherwise, Constantine will fetch the calendar for the next week to your system's date.")
+if (not 2 <= len(sys.argv) <= 4) or (sys.argv[1] in ['-h', '--help']):
+    print("Usage: python main.py /path/to/output.pdf [options]")
+    print("Options:")
+    print("--date=YYYY-MM-DD : Provide a date as the second argument to fetch the calendar for the following week of that date (not for the week the date is in!) e.g. 2017-02-01 | Default: Today's date.")
+    print("--text=/path/to/special/text.txt : Provide a custom path to the special text file to be included in the poster. | Default: special_text.txt under the script directory.")
     sys.exit(1)
 
 # Process date param.
-if len(sys.argv) == 3:
-    set_date = sys.argv[2]
-    if not utils.check_date_string(set_date):
-        print("Error: the date you have set is invalid, it must be in YYYY-MM-DD form such as 2017-02-01.")
-        sys.exit(1)
-    else:
-        set_date = datetime.datetime.strptime(set_date, "%Y-%m-%d")
-else:
-    set_date = datetime.datetime.today()
+set_date = datetime.datetime.today()
+text_file_path = utils.get_project_full_path() + "/special_text.txt"
+if len(sys.argv) > 2:
+    for argv in sys.argv[2:]:
+
+        # Date.
+        if (not argv.startswith('--')) or argv.startswith('--date='):
+            # Support old options format.
+            if argv.startswith('--date='):
+                set_date = argv[7:]
+            else:
+                set_date = argv
+
+            if not utils.check_date_string(set_date):
+                print("Error: the date you have set is invalid, it must be in YYYY-MM-DD form such as 2017-02-01.")
+                sys.exit(1)
+            else:
+                set_date = datetime.datetime.strptime(set_date, "%Y-%m-%d")
+
+        # Special text.
+        if argv.startswith('--text='):
+            text_file_path = argv[7:]
+            if text_file_path.startswith('~'):
+                text_file_path = os.path.expanduser('~') + '/' + text_file_path[1:]
 
 output_dir = sys.argv[1].rsplit('/', 1)[0]
 output_file = sys.argv[1]
@@ -86,8 +102,12 @@ print("Generating LaTeX file from template...")
 with open(utils.get_project_full_path() + "/latex_template.txt", 'r') as template_file:
     latex_template = template_file.read()
 
-with open(utils.get_project_full_path() + "/special_text.txt", 'r') as special_file:
-    special_text_lines = special_file.readlines()
+try:
+    with open(text_file_path, 'r') as special_file:
+        special_text_lines = special_file.readlines()
+except FileNotFoundError:
+    print("Error: special text file " + text_file_path + " cannot be found, the PDF cannot be generated. Exiting.")
+    sys.exit(1)
 
 latex_formatting = utils.settings_to_formatting(settings)
 latex_formatting['week_number'] = str(week_number)
@@ -110,7 +130,7 @@ if len(event_content) > 0:
 latex_formatting['event_content'] = event_content
 
 if len(special_text_lines) > 0:
-    special_content = "\\begin{minipage}{0.45\\textwidth}{\\fontsize{30}{40}\\selectfont %s }\\\\\\begin{addmargin}[1em]{0em}" % (special_text_lines[0])
+    special_content = "\\begin{minipage}{0.45\\textwidth}{\\fontsize{30}{40}\\selectfont %s }\\\\\\begin{addmargin}[1em]{0em}" % (utils.tex_escape(special_text_lines[0]))
     for line in special_text_lines[1:]:
         special_content += "{\\fontsize{16}{20}\\selectfont %s \\par}" % (utils.tex_escape(line))
     special_content += "\\end{addmargin}\\end{minipage}\\\\"
@@ -146,6 +166,3 @@ print("Copying PDF to " + output_file)
 p = subprocess.Popen(['cp', latex_target_path[:-4] + ".pdf", output_file], stdout=subprocess.PIPE, cwd=os.getcwd())
 result_code = p.returncode
 print("PDF should have been copied to: " + output_file)
-
-def main(): # Keep setuptools happy?
-    pass
