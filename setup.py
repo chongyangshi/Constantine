@@ -15,15 +15,15 @@ try:
 except:
     long_description = ""
 
-data_files = [('', ['settings.json', 'special_text.txt', 'latex_template.txt'])]
-directories = glob.glob('tex/logo/')
+data_files = [('Constantine/', ['Constantine/settings.json', 'Constantine/special_text.txt', 'Constantine/latex_template.txt'])]
+directories = glob.glob('Constantine/tex/logo/')
 for directory in directories:
     files = glob.glob(directory + '*')
     data_files.append((directory, files))
 
 setup(
     name='Constantine',
-    version='1.0.5',
+    version='1.1.2',
     description='A poster generator that does something that should have been automated ages ago.',
     long_description=long_description,
     url='https://github.com/icydoge/Constantine',
@@ -41,13 +41,14 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     keywords='pdf generator',
-    py_modules=['main', 'utils'],
+    packages = ['Constantine'],
     install_requires=['requests'],
     data_files=data_files,
     extras_require={},
     entry_points={
         'console_scripts': [
-            'Constantine=main:main',
+            'Constantine=Constantine.__main__:execute',
+            'Constantine-auto=Constantine.auto_poster'
         ],
     },
 )

@@ -24,15 +24,19 @@ def check_date_string(date):
     return True
 
 
-def read_config():
+def read_config(config_file_path):
     """ Return the configuration value of requestedKey. """
 
     full_path = get_project_full_path()
-    config_file = full_path + '/' + "settings.json"
-    if not os.path.isfile(config_file):
-        print("Error: I cannot find the configuration file settings.json.")
-        print("If you have not yet done so, please copy settings-example.json to settings.json and edit before running Constantine again.")
-        sys.exit(1)
+    default_config_file = os.path.join(full_path, "settings.json")
+
+    if config_file_path is None or not os.path.isfile(config_file_path):
+        print("Warning: I cannot find the configuration file.")
+        print("Using the default configuration file at " + str(default_config_file))
+        print("Please find an example config file at Docs/settings-example.json, and use --config= to specify your config file.")
+        config_file = default_config_file
+    else:
+        config_file = config_file_path
 
     try:
         with open(config_file) as SettingsFile:
