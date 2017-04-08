@@ -48,7 +48,7 @@ setup(
     entry_points={
         'console_scripts': [
             'Constantine=Constantine.__main__:execute',
-            'Constantine-auto=Constantine.auto_poster'
+            'Constantine-auto=Constantine.auto_poster:run'
         ],
     },
 )
