@@ -23,7 +23,7 @@ for directory in directories:
 
 setup(
     name='Constantine',
-    version='1.1.2',
+    version='1.1.2-1',
     description='A poster generator that does something that should have been automated ages ago.',
     long_description=long_description,
     url='https://github.com/icydoge/Constantine',
