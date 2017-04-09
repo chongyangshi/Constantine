@@ -15,16 +15,10 @@ try:
 except:
     long_description = ""
 
-data_files = [('Constantine/', ['Constantine/settings.json', 'Constantine/special_text.txt', 'Constantine/latex_template.txt'])]
-directories = glob.glob('Constantine/tex/logo/')
-for directory in directories:
-    files = glob.glob(directory + '*')
-    data_files.append((directory, files))
-
 setup(
     name='Constantine',
-    version='1.1.2-1',
-    description='A poster generator that does something that should have been automated ages ago.',
+    version='1.2',
+    description='Automatic event poster generator',
     long_description=long_description,
     url='https://github.com/icydoge/Constantine',
     author='C Shi',
@@ -43,7 +37,6 @@ setup(
     keywords='pdf generator',
     packages = ['Constantine'],
     install_requires=['requests'],
-    data_files=data_files,
     extras_require={},
     entry_points={
         'console_scripts': [
@@ -51,4 +44,5 @@ setup(
             'Constantine-auto=Constantine.auto_poster:run'
         ],
     },
+    include_package_data = True
 )
