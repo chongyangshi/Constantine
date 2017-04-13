@@ -92,8 +92,9 @@ ENV/
 .DS_Store
 
 # LaTeX working files.
-tex/Constantine-*
-tex/Constantine.*
+**/tex/Constantine-*
+**/tex/Constantine.*
+
 
 # File list no longer used.
 files.txt

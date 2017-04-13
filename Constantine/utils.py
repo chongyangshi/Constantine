@@ -65,10 +65,14 @@ def get_closest_date_time(current_date, date_list):
 
     def func(x):
        d = datetime.datetime.strptime(x, "%Y-%m-%d")
+       d = d - datetime.timedelta(days=d.weekday()) # Make sure it's a Monday.
        delta = current_date - d if d < current_date else datetime.timedelta.max
        return delta
 
-    return min(date_list, key = func)
+    closest_date = min(date_list, key = func)
+    closest_date = datetime.datetime.strptime(closest_date, "%Y-%m-%d")
+    closest_date = closest_date - datetime.timedelta(days=closest_date.weekday())
+    return datetime.datetime.strftime(closest_date, "%Y-%m-%d")
 
 
 def tex_escape(text):
