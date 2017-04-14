@@ -101,3 +101,6 @@ files.txt
 
 # Configuration file.
 /settings.json
+
+*.aux
+*.pdf
