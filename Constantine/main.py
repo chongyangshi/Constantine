@@ -25,7 +25,9 @@ def run(args):
         sys.exit(1)
 
     # Process date param.
-    set_date = datetime.datetime.today()
+    set_datetime = datetime.datetime.today()
+    # get a datetime that contains today's date, but no time.
+    set_date = datetime.datetime(year=set_datetime.year, month=set_datetime.month, day=set_datetime.day)
     text_file_path = utils.get_project_full_path() + "/special_text.txt"
     config_file_path = None
 
@@ -77,8 +79,11 @@ def run(args):
     monday_after = next_monday + datetime.timedelta(days=7)
     start_date = next_monday.strftime("%Y-%m-%d") + "T00:00:00Z"
     end_date = monday_after.strftime("%Y-%m-%d") + "T00:00:00Z"
-    term_start = datetime.datetime.strptime(utils.get_closest_date_time(next_monday, settings['term_start_dates']), "%Y-%m-%d")
+    # slight hack, add six days so that we are at the end of the week when searching
+    # for the term start date, since it might not be a monday
+    term_start = datetime.datetime.strptime(utils.get_closest_date_time(next_monday+datetime.timedelta(days=6), settings['term_start_dates']), "%Y-%m-%d")
     week_number = int((next_monday - term_start).days / 7 + 1)
+
 
     # Fetch data.
     request_url = GOOGLE_CALENDAR_API + settings['calendar_id'] + "/events"
@@ -102,7 +107,7 @@ def run(args):
         datetime_split = event_date.split('T')
         event_datetime = datetime.datetime.strptime(datetime_split[0], "%Y-%m-%d")
         event_start = datetime_split[1][:5]
-        event_day = int((event_datetime - next_monday).days) + 1
+        event_day = int((event_datetime - next_monday).days)
         event_item = {}
         event_item['what'] = utils.tex_escape(event['summary'])
         event_item['when'] = utils.tex_escape(event_start)
