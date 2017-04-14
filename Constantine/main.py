@@ -146,6 +146,7 @@ def run(args):
         event_content += "\\\\" # Only add empty line when there is an event to prevent no line to end error.
     latex_formatting['event_content'] = event_content
 
+    special_content = ''
     if len(special_text_lines) > 0:
         special_content = "\\begin{minipage}{0.45\\textwidth}{\\fontsize{30}{40}\\selectfont %s }\\\\\\begin{addmargin}[1em]{0em}" % (utils.tex_escape(special_text_lines[0]))
         for line in special_text_lines[1:]:
