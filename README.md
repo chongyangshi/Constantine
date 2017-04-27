@@ -12,7 +12,27 @@ You will also need to enable Google Calendar access for your API key, which can 
 ![Google Calendar API Access](https://i.imgur.com/QxBoJp5.png)
 
 # Configuration #
-After obtaining the API Key, **copy `Docs/settings-example.json` to a place of your liking, such as `~/.Constantine.json`**.
+After obtaining the API Key, **modify the config file as described below, and save it in a location such as `~/.Constantine.json`**.
+
+The config file:
+    {
+    	"logo": "tex/logo/default-logo.png",
+    	"url": "hacksoc.org",
+    	"email": "hack@yusu.org",
+    	"irc_network": "freenode",
+    	"irc_channel": "#cs-york",
+    	"twitter": "hacksoc!",
+    	"facebook": "hacksoc",
+    	"calendar_id": "hack@yusu.org",
+    	"google_api_key": "AIzaSyDaOwrkRiDcFFbO0s0-1qTd9jnhXtaw0Hg",
+    	"term_start_dates": ["2017-01-09", "2017-04-18", "2017-09-25", "2018-01-08", "2018-04-16", "2018-09-24", "2019-01-07", "2019-04-15"],
+    	"page_background_colour": "FFFFFF",
+    	"page_normal_text_colour": "393938",
+    	"page_emphasis_text_colour": "34537B",
+    	"page_deemphasis_text_colour": "6E6F6E"
+    }
+
+Alternatively, you can find an example config file under `Docs/settings-example.json` in this repository, or in the package directory (e.g. `env/lib/python3.5/site-packages/Constantine-1.2-py3.5.egg/Constantine`).
 
 Edit your `settings.json` as followed:
 * `logo`: either relative path or absolute path of your organisation's logo, which is highly recommended to be a background-transparent PNG file.

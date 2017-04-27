@@ -17,7 +17,7 @@ except:
 
 setup(
     name='Constantine',
-    version='1.2.2',
+    version='1.2.3',
     description='Automatic event poster generator',
     long_description=long_description,
     url='https://github.com/icydoge/Constantine',
