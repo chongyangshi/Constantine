@@ -15,6 +15,7 @@ You will also need to enable Google Calendar access for your API key, which can 
 After obtaining the API Key, **modify the config file as described below, and save it in a location such as `~/.Constantine.json`**.
 
 The config file:
+
     {
     	"logo": "tex/logo/default-logo.png",
     	"url": "hacksoc.org",
