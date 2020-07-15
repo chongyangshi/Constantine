@@ -20,7 +20,7 @@ setup(
     version='1.2.3',
     description='Automatic event poster generator',
     long_description=long_description,
-    url='https://github.com/icydoge/Constantine',
+    url='https://github.com/chongyangshi/Constantine',
     author='C Shi',
     author_email='icydoge@gmail.com',
     license='MIT',
